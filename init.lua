@@ -15,15 +15,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- [[ Configure and install plugins ]]
---
---  To check the current status of your plugins, run
---    :Lazy
---
---  You can press `?` in this menu for help. Use `:q` to close the window
---
---  To update plugins you can run
---    :Lazy update
---
 require("lazy").setup({
 	--{ "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 	require("plugins.colortheme"),
@@ -41,6 +32,8 @@ require("lazy").setup({
 	require("plugins.misc"),
 	require("plugins.comment"),
 	require("plugins.surround"),
+	require("plugins.autoclose"),
+	require("plugins.null"),
 })
 
 -- vim.cmd("colorscheme catppuccin-macchiato")
