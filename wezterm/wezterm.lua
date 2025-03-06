@@ -11,7 +11,18 @@ config.colors = colors
 config.colors = {
 	cursor_bg = "pink",
 	cursor_border = "pink",
+	foreground = "#D9E0EE", -- Light text color from Catppuccin
+	background = "#1E1E2E", -- Dark background from Catppuccin
+	cursor_fg = "#1E1E2E", -- Cursor foreground color
+	selection_bg = "#4C4E5C", -- Selection background color
+	selection_fg = "#D9E0EE",
+
+	blue = "#8C9EFF",
+	green = "#A6E3A1",
+	yellow = "#F9E2AF",
 }
+
+config.color_scheme = "Catppuccin Mocha"
 
 config.window_background_image_hsb = {
 	brightness = 0.06,
@@ -23,7 +34,7 @@ config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.window_background_image = constants.bg_image
 config.macos_window_background_blur = 40 -- doesnt work in cinnamon
-config.window_close_confirmation = 'NeverPrompt'
+config.window_close_confirmation = "NeverPrompt"
 
 config.window_padding = {
 	left = 0,
@@ -42,7 +53,8 @@ wezterm.on("augment-command-palette", function()
 end)
 
 config.keys = {
-    { key = "Q", mods = "CTRL|SHIFT", action = wezterm.action.QuitApplication },  -- Add this line to close WezTerm
+	{ key = "Q", mods = "CTRL|SHIFT", action = wezterm.action.QuitApplication }, -- Add this line to close WezTerm
 }
 
 return config
+
