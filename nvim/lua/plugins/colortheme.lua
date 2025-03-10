@@ -3,33 +3,85 @@ return {
 	lazy = false,
 	priority = 1000,
 	config = function()
-		-- Example config for Rose-Pine
-		vim.g.rose_pine_variant = "moon" -- You can change this to 'dawn', 'moon', or 'pine' for different variants
-		vim.g.rose_pine_italic = false -- Optional: Disable italic fonts
-		vim.g.rose_pine_bold = false -- Optional: Disable bold fonts
-
-		-- Set the background to transparent by default
-		vim.g.rose_pine_disable_background = false
-
-		-- Load the colorscheme
+		-- Set up Rose-Pine theme options
 		require("rose-pine").setup({
-			variant = vim.g.rose_pine_variant,
-			disable_background = vim.g.rose_pine_disable_background,
-			italic = vim.g.rose_pine_italic,
-			bold = vim.g.rose_pine_bold,
+			variant = "moon", -- auto, main, moon, or dawn
+			dark_variant = "moon", -- main, moon, or dawn
+			dim_inactive_windows = false,
+			extend_background_behind_borders = true,
+
+			enable = {
+				terminal = true,
+				legacy_highlights = true, -- Improve compatibility for previous versions of Neovim
+				migrations = true, -- Handle deprecated options automatically
+			},
+
+			styles = {
+				bold = true,
+				italic = false,
+				transparency = true, -- Set transparency to false to avoid issues
+			},
+
+			groups = {
+				border = "muted",
+				link = "iris",
+				panel = "surface",
+
+				error = "love",
+				hint = "iris",
+				info = "foam",
+				note = "pine",
+				todo = "rose",
+				warn = "gold",
+
+				git_add = "foam",
+				git_change = "rose",
+				git_delete = "love",
+				git_dirty = "rose",
+				git_ignore = "muted",
+				git_merge = "iris",
+				git_rename = "pine",
+				git_stage = "iris",
+				git_text = "rose",
+				git_untracked = "subtle",
+
+				h1 = "iris",
+				h2 = "foam",
+				h3 = "rose",
+				h4 = "gold",
+				h5 = "pine",
+				h6 = "foam",
+			},
+
+			-- palette = {
+			-- Override the builtin palette per variant
+			-- moon = {
+			-- 	base = "#18191a",
+			-- 	overlay = "#363738",
+			-- },
+			-- },
+
+			highlight_groups = {
+				Comment = { fg = "foam" },
+				StatusLine = { fg = "love", bg = "love", blend = 15 },
+				-- VertSplit = { fg = "muted", bg = "muted" },
+				-- Visual = { fg = "base", bg = "text", inherit = false },
+			},
+
+			before_highlight = function(group, highlight, palette)
+				-- Disable all undercurls
+				-- if highlight.undercurl then
+				--     highlight.undercurl = false
+				-- end
+				--
+				-- Change palette colour
+				-- if highlight.fg == palette.pine then
+				--     highlight.fg = palette.foam
+				-- end
+			end,
 		})
-		vim.cmd("colorscheme rose-pine") -- Apply the colorscheme
 
-		-- Toggle background transparency
-		local bg_transparent = true
-
-		local toggle_transparency = function()
-			bg_transparent = not bg_transparent
-			vim.g.rose_pine_disable_background = bg_transparent
-			vim.cmd([[colorscheme rose-pine]]) -- Reapply the colorscheme to reflect the change
-		end
-
-		-- Keymap to toggle background transparency
-		vim.keymap.set("n", "<leader>bg", toggle_transparency, { noremap = true, silent = true })
+		-- Apply the colorscheme based on the selected variant
+		vim.cmd("colorscheme rose-pine") -- Make sure you're using the correct colorscheme name
 	end,
 }

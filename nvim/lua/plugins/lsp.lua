@@ -168,7 +168,7 @@ return {
 				settings = {
 					pylsp = {
 						plugins = {
-							pyflakes = { enabled = true },
+							pyflakes = { enabled = false },
 							pycodestyle = { enabled = false },
 							autopep8 = { enabled = false },
 							yapf = { enabled = false },
