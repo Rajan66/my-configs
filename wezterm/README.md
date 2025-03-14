@@ -4,7 +4,7 @@
 
 #### For Debian/Ubuntu
 
-(Wezterm)[https://wezterm.org/install/linux.html]
+[Wezterm](https://wezterm.org/install/linux.html)
 
 #### Setup the configs
 
