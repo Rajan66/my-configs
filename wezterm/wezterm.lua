@@ -16,10 +16,6 @@ config.colors = {
 	cursor_fg = "#1E1E2E", -- Cursor foreground color
 	selection_bg = "#4C4E5C", -- Selection background color
 	selection_fg = "#D9E0EE",
-
-	blue = "#8C9EFF",
-	green = "#A6E3A1",
-	yellow = "#F9E2AF",
 }
 
 config.color_scheme = "Catppuccin Mocha"
@@ -57,4 +53,3 @@ config.keys = {
 }
 
 return config
-
