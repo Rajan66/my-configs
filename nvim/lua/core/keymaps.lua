@@ -67,4 +67,8 @@ vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnos
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 
+-- In your init.lua, set a keymap like this:
+vim.api.nvim_set_keymap("n", "<leader>gd", ":DiffviewOpen<CR>", { noremap = true, silent = true })
 
+-- Set a keymap to close the diffview
+vim.api.nvim_set_keymap("n", "<leader>gq", ":DiffviewClose<CR>", { noremap = true, silent = true })
