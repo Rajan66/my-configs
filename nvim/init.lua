@@ -35,6 +35,7 @@ require("lazy").setup({
 	require("plugins.autoclose"),
 	require("plugins.neoscroll"),
 	require("plugins.diffview"),
+	require("plugins.harpoon"),
 })
 
 -- vim.cmd("colorscheme catppuccin-macchiato")
