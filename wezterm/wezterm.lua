@@ -11,17 +11,10 @@ config.colors = colors
 config.colors = {
 	cursor_bg = "pink",
 	cursor_border = "pink",
-	foreground = "#D9E0EE", -- Light text color from Catppuccin
-	background = "#1E1E2E", -- Dark background from Catppuccin
-	cursor_fg = "#1E1E2E", -- Cursor foreground color
-	selection_bg = "#4C4E5C", -- Selection background color
-	selection_fg = "#D9E0EE",
 }
 
-config.color_scheme = "Catppuccin Mocha"
-
 config.window_background_image_hsb = {
-	brightness = 0.06,
+	brightness = 0.01,
 	hue = 1.0, -- Keep hue unchanged
 	saturation = 1.0, -- Keep saturation unchanged
 }
@@ -48,8 +41,37 @@ wezterm.on("augment-command-palette", function()
 	return commands
 end)
 
+local function adjust_brightness(window, delta)
+	wezterm.GLOBAL.current_brightness = wezterm.GLOBAL.current_brightness or 0.01
+	local new_brightness = math.max(0.01, math.min(1.0, wezterm.GLOBAL.current_brightness + delta))
+	wezterm.GLOBAL.current_brightness = new_brightness
+
+	local overrides = window:get_config_overrides() or {}
+	overrides.window_background_image_hsb = {
+		brightness = new_brightness,
+		hue = 1.0,
+		saturation = 1.0,
+	}
+	window:set_config_overrides(overrides)
+end
+
+-- Keybindings
 config.keys = {
-	{ key = "Q", mods = "CTRL|SHIFT", action = wezterm.action.QuitApplication }, -- Add this line to close WezTerm
+	{ key = "Q", mods = "CTRL|SHIFT", action = wezterm.action.QuitApplication },
+	{
+		key = "}",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action_callback(function(window)
+			adjust_brightness(window, 0.01)
+		end),
+	},
+	{
+		key = "{",
+		mods = "CTRL|SHIFT",
+		action = wezterm.action_callback(function(window)
+			adjust_brightness(window, -0.01)
+		end),
+	},
 }
 
 return config
