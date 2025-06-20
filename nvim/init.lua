@@ -33,7 +33,7 @@ require("lazy").setup({
 	require("plugins.comment"),
 	require("plugins.surround"),
 	require("plugins.autoclose"),
-	require("plugins.neoscroll"),
+	-- require("plugins.neoscroll"),
 	require("plugins.diffview"),
 	require("plugins.harpoon"),
 })
