@@ -39,3 +39,10 @@ require("lazy").setup({
 })
 
 -- vim.cmd("colorscheme catppuccin-macchiato")
+
+--- to hide the annoying deprecation warning
+vim.api.nvim_create_autocmd("VimEnter", {
+	callback = function()
+		vim.cmd("echo ''") -- Clear command line messages
+	end,
+})

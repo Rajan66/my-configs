@@ -74,3 +74,11 @@ vim.api.nvim_set_keymap("n", "<leader>gd", ":DiffviewOpen<CR>", { noremap = true
 
 -- Set a keymap to close the diffview
 vim.api.nvim_set_keymap("n", "<leader>gq", ":DiffviewClose<CR>", { noremap = true, silent = true })
+
+-- Clear the command line area
+vim.keymap.set("n", "<leader>cl", function()
+	vim.cmd('echo ""')
+end, { desc = "[C]lear Command [L]ine" })
+
+-- Close all buffers/files
+vim.keymap.set("n", "<leader>qa", ":%bd|e#|bd#<CR>", { desc = "Close all buffers", noremap = true, silent = true })

@@ -13,13 +13,19 @@ return {
 				close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
 				buffer_close_icon = "✗",
 				close_icon = "✗",
-				path_components = 1, -- Show only the file name without the directory
+				path_components = 2, -- or more if you want deeper folder nesting
+				name_formatter = function(buf)
+					local path = vim.fn.fnamemodify(buf.path, ":~:.") -- relative path
+					local parent = vim.fn.fnamemodify(path, ":h:t") -- get immediate parent folder
+					local filename = vim.fn.fnamemodify(path, ":t") -- get file name
+					return parent .. "/" .. filename
+				end,
 				modified_icon = "●",
 				left_trunc_marker = "",
 				right_trunc_marker = "",
 				max_name_length = 30,
 				max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
-				tab_size = 21,
+				tab_size = 26,
 				diagnostics = false,
 				diagnostics_update_in_insert = false,
 				color_icons = true,

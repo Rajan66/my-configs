@@ -9,14 +9,13 @@ return {
 		local formatting = null_ls.builtins.formatting -- formatters
 		local diagnostics = null_ls.builtins.diagnostics -- linters
 
-		-- Ensure other formatters & linters are installed via Mason
 		require("mason-null-ls").setup({
 			ensure_installed = {
-				"stylua", -- Lua formatter
-				"eslint_d", -- TS/JS linter
-				"shfmt", -- Shell script formatter
-				"checkmake", -- Linter for Makefiles
-				"ruff", -- Python linter and formatter
+				"stylua",
+				"eslint_d",
+				"shfmt",
+				"checkmake",
+				"ruff",
 				"prettierd",
 				"prettier",
 			},
@@ -24,17 +23,12 @@ return {
 		})
 
 		local sources = {
-			-- Linting
 			diagnostics.checkmake,
-
-			-- Formatting
 			formatting.stylua,
 			formatting.shfmt.with({ args = { "-i", "4" } }),
 			formatting.terraform_fmt,
 			require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
 			require("none-ls.formatting.ruff_format"),
-
-			--Prettier Formatting
 			formatting.prettierd.with({
 				filetypes = {
 					"html",
@@ -43,8 +37,8 @@ return {
 					"markdown",
 					"javascript",
 					"typescript",
-					"typescriptreact", -- Explicitly add this
-					"react", -- Added for good measure
+					"typescriptreact",
+					"react",
 					"css",
 					"scss",
 					"javascriptreact",
@@ -61,12 +55,13 @@ return {
 			}),
 		}
 
-		local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+		local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+
 		null_ls.setup({
-			debug = true, -- Add debug mode for troubleshooting
+			debug = false, -- disable debug in regular usage
 			sources = sources,
 			on_attach = function(client, bufnr)
-				if client.supports_method("textDocument/formatting") then
+				if client:supports_method("textDocument/formatting") then
 					vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 					vim.api.nvim_create_autocmd("BufWritePre", {
 						group = augroup,
